@@ -15,3 +15,17 @@ kubectl apply -f service.yaml
 - Multi-stage Docker builds significantly reduce image size.
 - Kubernetes ensures high availability through replica management.
 - Self-healing behavior improves system reliability.
+
+## Reflection
+
+### Why namespaces alone are not enough?
+Namespaces isolate processes but do not limit resource usage.
+
+### How do cgroups help?
+They control CPU and memory usage, ensuring fair resource allocation.
+
+### What is desired state?
+Kubernetes continuously ensures the system matches the defined state.
+
+### Difference between readiness and liveness?
+Readiness checks availability, liveness checks health.
