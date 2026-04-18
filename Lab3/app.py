@@ -3,8 +3,10 @@ import logging
 
 app = Flask(__name__)
 
-logging.basicConfig(level=logging.INFO)
-
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
 @app.route("/")
 def home():
     logging.info("Home endpoint was called")
