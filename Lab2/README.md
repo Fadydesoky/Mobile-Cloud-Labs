@@ -15,3 +15,6 @@ In distributed systems, maintaining consistency between nodes is challenging and
 
 ## Performance
 System performance may vary depending on workload distribution and resource usage.
+
+
+Consistency models like eventual consistency are commonly used in cloud systems to balance performance and reliability.
