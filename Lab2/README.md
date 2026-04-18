@@ -18,3 +18,5 @@ System performance may vary depending on workload distribution and resource usag
 
 
 Consistency models like eventual consistency are commonly used in cloud systems to balance performance and reliability.
+
+Distributed systems often sacrifice strong consistency in favor of availability and scalability (CAP theorem).
