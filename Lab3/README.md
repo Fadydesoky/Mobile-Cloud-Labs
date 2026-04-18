@@ -39,3 +39,7 @@ Readiness checks availability, liveness checks health.
 - Multi-stage builds were used to reduce image size.
 - Kubernetes Deployment ensures scalability and fault tolerance.
 - Probes improve system reliability by monitoring health.
+
+## Scheduling
+
+Kubernetes automatically assigns pods to nodes using a scheduler, without requiring manual placement.
