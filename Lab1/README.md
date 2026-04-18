@@ -25,3 +25,7 @@ docker run -p 5000:5000 lab1
 ### Access
 Open browser and go to:
 http://localhost:5000
+
+## Observation
+
+Containers showed significantly faster startup time compared to virtual machines.
