@@ -16,9 +16,9 @@ kubectl apply -f service.yaml
 - Kubernetes ensures high availability through replica management.
 - Self-healing behavior improves system reliability.
 
-## Self-Healing Observation
+## Self-Healing
 
-When a pod fails, Kubernetes automatically replaces it to maintain the desired state.
+When a pod is deleted, Kubernetes automatically creates a new one to maintain the desired state.
 
 ## Reflection
 
@@ -34,12 +34,19 @@ Kubernetes continuously ensures the system matches the defined state.
 ### Difference between readiness and liveness?
 Readiness checks availability, liveness checks health.
 
+## Namespaces and cgroups
+
+Namespaces isolate process visibility such as PID and network.
+Cgroups control resource allocation like CPU and memory limits.
+
+## Scheduling
+
+Kubernetes automatically schedules pods to nodes based on available resources and constraints.
+
+
+
 ## Design Decisions
 
 - Multi-stage builds were used to reduce image size.
 - Kubernetes Deployment ensures scalability and fault tolerance.
 - Probes improve system reliability by monitoring health.
-
-## Scheduling
-
-Kubernetes automatically assigns pods to nodes using a scheduler, without requiring manual placement.
