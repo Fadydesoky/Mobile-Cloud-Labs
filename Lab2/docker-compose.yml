@@ -1,13 +1,20 @@
-version: '3'
+version: '3.8'
+
 services:
-  redis1:
+  redis-primary:
     image: redis:7-alpine
-    container_name: redis1
+    container_name: redis-primary
     ports:
       - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+    restart: unless-stopped
 
-  redis2:
+  redis-replica:
     image: redis:7-alpine
-    container_name: redis2
+    container_name: redis-replica
     ports:
       - "6380:6379"
+    command: ["redis-server", "--replicaof", "redis-primary", "6379"]
+    depends_on:
+      - redis-primary
+    restart: unless-stopped
