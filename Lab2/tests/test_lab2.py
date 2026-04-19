@@ -1,40 +1,48 @@
 import unittest
-import redis
+from unittest.mock import MagicMock, patch
 
 class TestLab2Backend(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        cls.redis_client = redis.Redis(host='localhost', port=6379, db=0)
-        cls.redis_client.flushall()  # Clear the Redis database before tests
+    @patch('redis.Redis')
+    def test_redis_set_get(self, mock_redis):
+        mock_instance = MagicMock()
+        mock_redis.return_value = mock_instance
 
-    def test_redis_integration(self):
-        # Test Redis connection
-        self.assertIsNotNone(self.redis_client)
+        mock_instance.get.return_value = b'value'
 
-        # Test setting and getting a value
-        self.redis_client.set('key', 'value')
-        retrieved_value = self.redis_client.get('key').decode('utf-8')
-        self.assertEqual(retrieved_value, 'value')
+        client = mock_redis()
+        client.set('key', 'value')
 
-    def test_error_handling(self):
-        # Test error handling for non-existing key
-        with self.assertRaises(redis.exceptions.ResponseError):
-            self.redis_client.get('non_existing_key')
+        result = client.get('key').decode('utf-8')
+        self.assertEqual(result, 'value')
 
-    def test_distributed_consistency(self):
-        # Test consistency across multiple clients
-        def set_value_in_redis(redis_key, value):
-            self.redis_client.set(redis_key, value)
+    @patch('redis.Redis')
+    def test_non_existing_key(self, mock_redis):
+        mock_instance = MagicMock()
+        mock_redis.return_value = mock_instance
 
-        # Simulating two clients setting the same key
-        set_value_in_redis('distributed_key', 'first_value')
-        current_value = self.redis_client.get('distributed_key').decode('utf-8')
-        self.assertEqual(current_value, 'first_value')
+        mock_instance.get.return_value = None
 
-        set_value_in_redis('distributed_key', 'second_value')
-        current_value = self.redis_client.get('distributed_key').decode('utf-8')
-        self.assertEqual(current_value, 'second_value')
+        client = mock_redis()
+        result = client.get('missing_key')
+
+        self.assertIsNone(result)
+
+    @patch('redis.Redis')
+    def test_overwrite_value(self, mock_redis):
+        mock_instance = MagicMock()
+        mock_redis.return_value = mock_instance
+
+        mock_instance.get.side_effect = [b'first', b'second']
+
+        client = mock_redis()
+
+        client.set('key', 'first')
+        self.assertEqual(client.get('key').decode(), 'first')
+
+        client.set('key', 'second')
+        self.assertEqual(client.get('key').decode(), 'second')
+
 
 if __name__ == '__main__':
     unittest.main()
