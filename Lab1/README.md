@@ -1,26 +1,75 @@
 # Lab 1 - Virtualization and Cloud
 
 ## Objective
-This lab explores virtualization concepts, cloud infrastructure, and latency behavior.
+This lab explores virtualization concepts, cloud infrastructure, and latency behavior in cloud-based applications.
 
-## VM vs Containers
-Containers are lightweight and start quickly.
-Virtual Machines provide stronger isolation but consume more resources.
+---
 
-## VM vs Container Observation
+## Application Overview
 
-Containers started in seconds with minimal memory usage, while virtual machines required significantly more time and resources.
+A Flask-based API was implemented to simulate a cloud service with variable response times.
+
+The application introduces random delays to mimic real-world latency in distributed systems.
+
+---
+
+## VM vs Container Comparison
+
+| Feature        | Virtual Machine (VM) | Container |
+|----------------|---------------------|----------|
+| Startup Time   | Minutes              | Seconds  |
+| Resource Usage | High                | Low      |
+| Isolation      | Strong              | Moderate |
+| OS             | Full OS             | Shared Kernel |
+
+---
+
+## Observations
+
+- Containers start significantly faster than virtual machines.
+- Containers consume fewer system resources.
+- VMs provide stronger isolation but with higher overhead.
+
+---
 
 ## Latency Analysis
 
-The response time distribution showed a long tail due to random delays, indicating variability under concurrent load.
+The application simulates latency using random delays.
 
-## AWS Nitro
-AWS uses Nitro Hypervisor to improve performance and security by offloading virtualization tasks to hardware.
+### Key Observations:
+- Response times vary between requests.
+- A long-tail distribution appears under repeated calls.
+- This reflects real-world cloud latency behavior.
+
+---
+
+## Latency Histogram
+
+![Latency Histogram](screenshots/latency.png)
+
+---
+
+## AWS Exploration
+
+Amazon EC2 instances use the Nitro Hypervisor, which offloads virtualization tasks to dedicated hardware.
+
+### Benefits:
+- Improved performance
+- Enhanced security
+- Better isolation
+
+---
 
 ## Tail Latency
-Latency varies due to delays in processing.
-Tail latency increases when the system is under load.
+
+Tail latency refers to the slowest responses in a system.
+
+In this experiment:
+- Most responses are fast
+- A few requests take longer
+- This creates a long-tail distribution
+
+---
 
 ## How to Run
 
@@ -31,9 +80,12 @@ docker build -t lab1 .
 docker run -p 5000:5000 lab1
 
 ### Access
-Open browser and go to:
 http://localhost:5000
 
-## Observation
+---
 
-Containers showed significantly faster startup time compared to virtual machines.
+## Conclusion
+
+Containers provide a more efficient environment for microservices, while virtual machines offer stronger isolation.
+
+Latency behavior in cloud applications is variable, and understanding tail latency is critical for system design.
