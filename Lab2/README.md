@@ -47,7 +47,7 @@ This demonstrates how applications interact with distributed systems in real-wor
 
 ## Interpretation
 
-This behavior reflects **eventual consistency**, where replicas may not instantly reflect the latest data.
+This behavior can simulate eventual consistency in distributed systems where replication delays may occur.
 
 ---
 
