@@ -1,38 +1,19 @@
-"""
-Lab2: Distributed Consistency and Cloud Systems
-Redis-based distributed system simulation with error handling
-"""
-
-from flask import Flask, jsonify, request
+from flask import Flask, request, jsonify
 import redis
-import logging
 import os
-from datetime import datetime
-
-# ============================
-# Configuration
-# ============================
-REDIS_PRIMARY_HOST = os.getenv('REDIS_PRIMARY_HOST', 'localhost')
-REDIS_PRIMARY_PORT = int(os.getenv('REDIS_PRIMARY_PORT', 6379))
-REDIS_REPLICA_HOST = os.getenv('REDIS_REPLICA_HOST', 'localhost')
-REDIS_REPLICA_PORT = int(os.getenv('REDIS_REPLICA_PORT', 6380))
-REDIS_TIMEOUT = int(os.getenv('REDIS_TIMEOUT', 5))
-APP_ENV = os.getenv('APP_ENV', 'development')
 
 app = Flask(__name__)
 
 # ============================
-# Logging
+# Redis Configuration
 # ============================
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
 
-# ============================
-# Redis Connections
-# ============================
+REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
+REDIS_PORT = int(os.getenv("REDIS_PORT", 6379))
+
+REDIS_REPLICA_HOST = os.getenv("REDIS_REPLICA_HOST", "localhost")
+REDIS_REPLICA_PORT = int(os.getenv("REDIS_REPLICA_PORT", 6380))
+
 redis_primary = None
 redis_replica = None
 
@@ -42,110 +23,173 @@ def init_redis_connections():
 
     try:
         redis_primary = redis.Redis(
-            host=REDIS_PRIMARY_HOST,
-            port=REDIS_PRIMARY_PORT,
-            socket_connect_timeout=REDIS_TIMEOUT,
+            host=REDIS_HOST,
+            port=REDIS_PORT,
             decode_responses=True
         )
         redis_primary.ping()
-        logger.info("Connected to PRIMARY Redis")
+        print("✅ Connected to PRIMARY Redis")
+
     except Exception as e:
-        logger.warning(f"Primary Redis failed: {e}")
+        print("❌ Primary Redis failed:", e)
         redis_primary = None
 
     try:
         redis_replica = redis.Redis(
             host=REDIS_REPLICA_HOST,
             port=REDIS_REPLICA_PORT,
-            socket_connect_timeout=REDIS_TIMEOUT,
             decode_responses=True
         )
         redis_replica.ping()
-        logger.info("Connected to REPLICA Redis")
+        print("✅ Connected to REPLICA Redis")
+
     except Exception as e:
-        logger.warning(f"Replica Redis failed: {e}")
+        print("❌ Replica Redis failed:", e)
         redis_replica = None
-
-
-# ============================
-# CORS
-# ============================
-@app.after_request
-def add_headers(response):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    return response
 
 
 # ============================
 # Routes
 # ============================
 
-@app.route('/')
+@app.route("/")
 def home():
-    """Basic API info"""
     return jsonify({
-        "service": "Redis Distributed System",
-        "env": APP_ENV,
-        "time": datetime.utcnow().isoformat()
+        "message": "Mobile Cloud Lab2 API",
+        "status": "running"
     })
 
 
-@app.route('/write', methods=['POST', 'GET'])
+# ----------------------------
+# WRITE (Primary)
+# ----------------------------
+@app.route("/write", methods=["POST"])
 def write():
     """
     Write data to PRIMARY Redis
     """
+    data = request.get_json()
 
-    try:
-        if request.method == 'POST':
-            data = request.get_json() or {}
-            key = data.get("key", "test_key")
-            value = data.get("value", "hello")
-        else:
-            key = request.args.get("key", "test_key")
-            value = request.args.get("value", "hello")
+    if not data or "key" not in data or "value" not in data:
+        return jsonify({"error": "Missing key or value"}), 400
 
-        if redis_primary:
-            redis_primary.set(key, value)
-            return jsonify({
-                "status": "success",
-                "key": key,
-                "value": value,
-                "node": "primary"
-            })
-        else:
-            return jsonify({"error": "Primary unavailable"}), 503
+    if not redis_primary:
+        return jsonify({"error": "Primary unavailable"}), 503
 
-    except Exception as e:
-        logger.error(e)
-        return jsonify({"error": "internal error"}), 500
+    key = data["key"]
+    value = data["value"]
+
+    redis_primary.set(key, value)
+
+    return jsonify({
+        "message": "Written to primary",
+        "key": key,
+        "value": value
+    })
 
 
-@app.route('/read-primary')
-def read_primary():
+# ----------------------------
+# READ (Primary)
+# ----------------------------
+@app.route("/read")
+def read():
     """
     Read from PRIMARY Redis
     """
-
     key = request.args.get("key", "test_key")
 
-    if redis_primary:
-        value = redis_primary.get(key)
-        return jsonify({
-            "source": "primary",
-            "key": key,
-            "value": value
-        })
-    else:
+    if not redis_primary:
         return jsonify({"error": "Primary unavailable"}), 503
 
+    value = redis_primary.get(key)
 
-@app.route('/read-replica')
+    return jsonify({
+        "source": "primary",
+        "key": key,
+        "value": value
+    })
+
+
+# ----------------------------
+# READ (Replica)
+# ----------------------------
+@app.route("/read-replica")
 def read_replica():
     """
-    Read from REPLICA Redis
+    Read from REPLICA Redis (eventual consistency)
+    """
+    key = request.args.get("key", "test_key")
+
+    if not redis_replica:
+        return jsonify({"error": "Replica unavailable"}), 503
+
+    value = redis_replica.get(key)
+
+    return jsonify({
+        "source": "replica",
+        "key": key,
+        "value": value,
+        "note": "eventual consistency"
+    })
+
+
+# ----------------------------
+# STATUS
+# ----------------------------
+@app.route("/status")
+def status():
+    """
+    Check Redis health
     """
 
+    def check(r):
+        try:
+            r.ping()
+            return "healthy"
+        except:
+            return "down"
+
+    return jsonify({
+        "primary": check(redis_primary) if redis_primary else "missing",
+        "replica": check(redis_replica) if redis_replica else "missing"
+    })
+
+
+# ----------------------------
+# HEALTH (for Docker/K8s)
+# ----------------------------
+@app.route("/health")
+def health():
+    return "ok", 200
+
+
+# ----------------------------
+# READY (important for K8s)
+# ----------------------------
+@app.route("/ready")
+def ready():
+    if redis_primary:
+        try:
+            redis_primary.ping()
+            return "ready", 200
+        except:
+            return "not ready", 503
+
+    return "not ready", 503
+
+
+# ============================
+# Main
+# ============================
+
+if __name__ == "__main__":
+    init_redis_connections()
+
+    app.run(
+        host="0.0.0.0",
+        port=5001,
+        debug=True
+    )
     key = request.args.get("key", "test_key")
 
     if redis_replica:
