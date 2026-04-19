@@ -1,5 +1,6 @@
 # Mobile-Cloud-System
 
+![CI](https://github.com/Fadydesoky/Mobile-Cloud-System/actions/workflows/ci.yml/badge.svg)
 ![Docker](https://img.shields.io/badge/Docker-Containerization-blue)
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-Orchestration-blueviolet)
 ![Python](https://img.shields.io/badge/Python-Flask-yellow)
