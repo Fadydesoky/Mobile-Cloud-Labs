@@ -36,7 +36,11 @@ jobs:
 
       - run: |
           flake8 Lab2 Lab3 || true
-
+      
+      - name: Validate Lab4 Docker Compose
+        run: |
+          cd Lab4
+          docker compose config
 
   # ============================
   # Frontend Build
