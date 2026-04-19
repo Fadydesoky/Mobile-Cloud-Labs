@@ -61,10 +61,12 @@ API: http://localhost:5000
 
 Sample response from the backend:
 
+```json
 {
-   "message":"Mobile Cloud API",
-   "delay":0.73
+  "message": "Mobile Cloud API",
+  "delay": 0.73
 }
+```
 
 ## Screenshots
 
