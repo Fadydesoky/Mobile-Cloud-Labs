@@ -119,6 +119,18 @@ Sample response from the backend:
   
 ---
 
+## CI/CD
+
+A lightweight CI pipeline is implemented using GitHub Actions to validate:
+
+- Backend code integrity  
+- Frontend build process  
+- Docker image creation  
+
+This ensures the system is consistently buildable and production-ready.
+
+---
+
 ## Key Concepts Covered
 
 - Virtualization vs Containerization  
