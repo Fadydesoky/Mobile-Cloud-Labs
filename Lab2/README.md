@@ -1,47 +1,95 @@
 # Lab 2 - Distributed Consistency and Cloud Systems
 
 ## Objective
-This lab explores distributed systems concepts, consistency, and cloud-based deployments.
+This lab explores distributed systems concepts such as consistency, replication, and fault tolerance using a simulated Redis environment.
 
-## Containers vs Virtual Machines
-Containers are more efficient and scalable for modern cloud applications.
-Virtual Machines provide stronger isolation and are useful for legacy systems.
+---
 
-## Cloud Infrastructure
-Cloud platforms provide scalable resources and distributed environments for applications.
+## Application Overview
 
-## Redis Replication
+A minimal distributed setup was considered using two Redis nodes:
+- redis1 (primary node)
+- redis2 (secondary node)
 
-Redis replication demonstrates eventual consistency where replicas may lag behind the primary node.
+This setup is used to observe how data behaves across multiple nodes in a distributed system.
 
-## Network Partition
+---
 
-When a node is disconnected, writes may not propagate immediately, illustrating CAP trade-offs.
+## Redis Simulation
 
-## Raft Consensus
+![Redis Simulation](screenshots/redis-simulation.png)
 
-etcd uses the Raft algorithm to elect a leader and maintain consistency across nodes.
-
-## Experimental Setup
-
-A simulated Redis replication environment was analyzed using two nodes.
-
-A key was written to the primary node and read from a secondary node.
+---
 
 ## Observation
 
-The secondary node did not immediately reflect the written value, demonstrating eventual consistency behavior.
+- Data written to the primary node was not immediately available in the secondary node.
+- This indicates a delay in data propagation between nodes.
+
+---
 
 ## Interpretation
 
-This behavior reflects real-world distributed systems where replication is asynchronous and may introduce delays.
+This behavior reflects **eventual consistency**, where replicas may not instantly reflect the latest data.
 
-## Consistency
-In distributed systems, maintaining consistency between nodes is challenging and depends on coordination and communication.
+---
 
-## Performance
-System performance may vary depending on workload distribution and resource usage.
+## Consistency in Distributed Systems
 
-Consistency models like eventual consistency are commonly used in cloud systems to balance performance and reliability.
+Maintaining consistency across distributed nodes is challenging due to:
+- Network delays  
+- Replication lag  
+- Node failures  
 
-Distributed systems often sacrifice strong consistency in favor of availability and scalability (CAP theorem).
+---
+
+## CAP Theorem
+
+Distributed systems must balance between:
+- Consistency  
+- Availability  
+- Partition Tolerance  
+
+In most real-world systems, a trade-off is made to achieve scalability and availability.
+
+---
+
+## Network Partition
+
+When a node becomes unreachable:
+- Updates may not propagate  
+- Systems must choose between consistency and availability  
+
+---
+
+## Raft Consensus
+
+Systems like etcd use the Raft algorithm to:
+- Elect a leader  
+- Synchronize state across nodes  
+- Handle failures automatically  
+
+---
+
+## Performance Considerations
+
+- Replication improves availability  
+- Asynchronous replication may introduce delays  
+- Trade-offs are required for scalability  
+
+---
+
+## Key Insight
+
+Even a simple distributed setup demonstrates real-world challenges in maintaining consistency, highlighting the importance of system design in cloud environments.
+
+---
+
+## Conclusion
+
+This lab demonstrates how distributed systems handle data consistency and replication.
+
+It shows that:
+- Data consistency is not always immediate  
+- Distributed systems require trade-offs  
+- System design plays a critical role in performance and reliability  
