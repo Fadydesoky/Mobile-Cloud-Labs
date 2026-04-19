@@ -49,6 +49,16 @@ The application simulates latency using random delays.
 
 ---
 
+## Resource Usage
+
+### System Memory (Host Machine)
+
+![System Memory](screenshots/system-memory.png)
+
+The system utilizes approximately 11 GB of memory, highlighting the resource consumption of the host environment compared to lightweight containers.
+
+This supports the observation that virtualized environments typically have higher resource overhead than container-based applications.
+
 ## AWS Exploration
 
 The AWS EC2 environment represents a real-world cloud deployment scenario where such applications can be hosted.
