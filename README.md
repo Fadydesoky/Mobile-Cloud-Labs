@@ -54,6 +54,9 @@ This represents a complete mobile-cloud workflow:
 ### Latency Histogram
 ![Latency](Lab1/screenshots/latency.png)
 
+### Frontend Dashboard
+![Frontend](frontend/screenshots/frontend.png)
+
 ---
 
 ## Technologies Used
@@ -62,7 +65,7 @@ This represents a complete mobile-cloud workflow:
 - Python (Flask API)
 - Kubernetes (Orchestration Concepts)
 - Redis (Distributed Systems Simulation)
-
+- React.JS (Frontend Dashboard)
 ---
 
 ## Key Concepts Covered
