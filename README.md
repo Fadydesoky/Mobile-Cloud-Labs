@@ -139,6 +139,20 @@ Sample response from the backend:
 
 ---
 
+## System Explanation
+
+This project demonstrates a simplified mobile-cloud architecture.
+
+The frontend acts as a client that communicates with a backend API built using Flask.
+
+The backend is containerized using Docker to ensure portability and consistency across environments.
+
+Kubernetes configurations are provided to simulate orchestration features such as scaling, scheduling, and self-healing.
+
+Redis is used to simulate distributed system behavior, particularly eventual consistency between nodes.
+
+Overall, the system represents how modern cloud-native applications are structured and deployed.
+
 ## Notes
 
 This project combines practical implementations with conceptual understanding of cloud-native systems.
