@@ -22,6 +22,18 @@ The application introduces random delays to mimic real-world latency in distribu
 | Isolation      | Strong              | Moderate |
 | OS             | Full OS             | Shared Kernel |
 
+
+## Benchmark Results
+
+| Metric         | Container        | Virtual Machine        |
+|----------------|------------------|------------------------|
+| Startup Time   | ~1-2 seconds     | ~30-60 seconds         |
+| Memory Usage   | Low (shared OS)  | High (full OS required)|
+
+Containers demonstrate significantly faster startup times and lower resource consumption due to sharing the host operating system kernel.
+
+In contrast, virtual machines require a full operating system, resulting in higher memory usage and longer initialization time.
+
 ---
 
 ## Observations
@@ -55,9 +67,12 @@ The application simulates latency using random delays.
 
 ![System Memory](screenshots/system-memory.png)
 
+
 The system utilizes approximately 11 GB of memory, highlighting the resource consumption of the host environment compared to lightweight containers.
 
 This supports the observation that virtualized environments typically have higher resource overhead than container-based applications.
+
+Containers, in contrast, share the host OS kernel, resulting in significantly lower memory usage.
 
 ## AWS Exploration
 
