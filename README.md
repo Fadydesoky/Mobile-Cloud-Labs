@@ -11,13 +11,13 @@ This repository contains implementations for Mobile and Cloud Computing labs.
 ## Screenshots
 
 ### Docker Build
-![Docker Build](screenshots/docker-build.png)
+![Docker Build](Lab3/screenshots/docker-build.png)
 
 ### Docker Images
-![Docker Images](screenshots/docker-images.png)
+![Docker Images](Lab3/screenshots/docker-images.png)
 
 ### Kubernetes Pods
-![Kubernetes Pods](screenshots/k8s-pods.png)
+![Kubernetes Pods](Lab3/screenshots/k8s-pods.png)
 
 ### Redis Simulation (Distributed System)
 ![Redis Simulation](Lab2/screenshots/redis-simulation.png)
