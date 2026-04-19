@@ -6,7 +6,7 @@ docker build -f Dockerfile.basic -t lab3 .
 ### Run Container
 docker run -p 5000:5000 lab3
 
-### Kubernetes
+### Kubernetes (Simulation)
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 
@@ -15,6 +15,7 @@ kubectl apply -f service.yaml
 - Multi-stage Docker builds significantly reduce image size.
 - Kubernetes ensures high availability through replica management.
 - Self-healing behavior improves system reliability.
+- Kubernetes follows a declarative model where the system continuously maintains the desired state.
 
 ## Self-Healing
 
@@ -52,5 +53,25 @@ Kubernetes automatically schedules pods to nodes based on available resources an
 
 ## Practical Execution
 
-Docker images were built and tested locally.
-Kubernetes configuration files were prepared to simulate deployment behavior.
+Docker images were prepared and configured for building and execution.
+Kubernetes configuration files were designed to represent deployment scenarios and expected orchestration behavior.
+
+## Execution Note
+
+The Kubernetes configuration files represent a deployment scenario for a containerized application.
+
+The expected behavior includes:
+- Automatic pod scheduling
+- Replication management
+- Self-healing in case of failure
+
+## Critical Thinking
+
+Although full Kubernetes cluster execution was not performed, the provided configurations reflect real-world deployment scenarios.
+
+The system is designed to handle:
+- Automatic scheduling of pods
+- Fault tolerance through self-healing
+- Load distribution using replicas
+
+This demonstrates an understanding of how modern cloud-native systems operate in production environments.
