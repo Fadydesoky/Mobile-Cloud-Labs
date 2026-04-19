@@ -26,7 +26,7 @@ It simulates a mobile client that communicates with cloud services through HTTP 
 
 ## Screenshot
 
-![Frontend](Mobile-Cloud-System/frontend/screenshots/frontend.png)
+![Frontend](../frontend/screenshots/frontend.png)
 
 ---
 
