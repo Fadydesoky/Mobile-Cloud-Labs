@@ -4,10 +4,6 @@ import os
 
 app = Flask(__name__)
 
-# ============================
-# Redis Config
-# ============================
-
 REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
 REDIS_PORT = int(os.getenv("REDIS_PORT", 6379))
 
@@ -22,130 +18,58 @@ def init_redis_connections():
     global redis_primary, redis_replica
 
     try:
-        redis_primary = redis.Redis(
-            host=REDIS_HOST,
-            port=REDIS_PORT,
-            decode_responses=True
-        )
+        redis_primary = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, decode_responses=True)
         redis_primary.ping()
-        print("✅ Connected to PRIMARY Redis")
-    except Exception as e:
-        print("❌ Primary Redis error:", e)
+    except:
         redis_primary = None
 
     try:
-        redis_replica = redis.Redis(
-            host=REDIS_REPLICA_HOST,
-            port=REDIS_REPLICA_PORT,
-            decode_responses=True
-        )
+        redis_replica = redis.Redis(host=REDIS_REPLICA_HOST, port=REDIS_REPLICA_PORT, decode_responses=True)
         redis_replica.ping()
-        print("✅ Connected to REPLICA Redis")
-    except Exception as e:
-        print("❌ Replica Redis error:", e)
+    except:
         redis_replica = None
 
 
-# ============================
-# Routes
-# ============================
-
 @app.route("/")
 def home():
-    return jsonify({
-        "message": "Mobile Cloud Lab2 API",
-        "status": "running"
-    })
+    return jsonify({"message": "Lab2 API working"})
 
 
-# ----------------------------
-# WRITE → Primary
-# ----------------------------
 @app.route("/write", methods=["POST"])
 def write():
     data = request.get_json()
 
     if not data or "key" not in data or "value" not in data:
-        return jsonify({"error": "Missing key or value"}), 400
+        return jsonify({"error": "Missing key/value"}), 400
 
     if not redis_primary:
         return jsonify({"error": "Primary unavailable"}), 503
 
-    key = data["key"]
-    value = data["value"]
+    redis_primary.set(data["key"], data["value"])
 
-    redis_primary.set(key, value)
-
-    return jsonify({
-        "message": "Written to primary",
-        "key": key,
-        "value": value
-    })
+    return jsonify({"status": "written"})
 
 
-# ----------------------------
-# READ → Primary
-# ----------------------------
 @app.route("/read")
 def read():
-    key = request.args.get("key", "test_key")
+    key = request.args.get("key", "test")
 
     if not redis_primary:
         return jsonify({"error": "Primary unavailable"}), 503
 
     value = redis_primary.get(key)
 
-    return jsonify({
-        "source": "primary",
-        "key": key,
-        "value": value
-    })
+    return jsonify({"key": key, "value": value})
 
 
-# ----------------------------
-# READ → Replica
-# ----------------------------
-@app.route("/read-replica")
-def read_replica():
-    key = request.args.get("key", "test_key")
-
-    if not redis_replica:
-        return jsonify({"error": "Replica unavailable"}), 503
-
-    value = redis_replica.get(key)
-
-    return jsonify({
-        "source": "replica",
-        "key": key,
-        "value": value,
-        "note": "eventual consistency"
-    })
-
-
-# ----------------------------
-# STATUS
-# ----------------------------
-@app.route("/status")
-def status():
-    def check(r):
-        try:
-            r.ping()
-            return "healthy"
-        except:
-            return "down"
-
-    return jsonify({
-        "primary": check(redis_primary) if redis_primary else "missing",
-        "replica": check(redis_replica) if redis_replica else "missing"
-    })
-
-
-# ----------------------------
-# HEALTH
-# ----------------------------
 @app.route("/health")
 def health():
     return "ok", 200
+
+
+if __name__ == "__main__":
+    init_redis_connections()
+    app.run(host="0.0.0.0", port=5001)    return "ok", 200
 
 
 # ----------------------------
