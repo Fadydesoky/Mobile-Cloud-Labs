@@ -22,9 +22,19 @@ When a node is disconnected, writes may not propagate immediately, illustrating 
 
 etcd uses the Raft algorithm to elect a leader and maintain consistency across nodes.
 
+## Experimental Setup
+
+A simulated Redis replication environment was analyzed using two nodes.
+
+A key was written to the primary node and read from a secondary node.
+
 ## Observation
 
-Leader re-election occurs automatically when the leader node fails, ensuring system availability.
+The secondary node did not immediately reflect the written value, demonstrating eventual consistency behavior.
+
+## Interpretation
+
+This behavior reflects real-world distributed systems where replication is asynchronous and may introduce delays.
 
 ## Consistency
 In distributed systems, maintaining consistency between nodes is challenging and depends on coordination and communication.
@@ -32,11 +42,6 @@ In distributed systems, maintaining consistency between nodes is challenging and
 ## Performance
 System performance may vary depending on workload distribution and resource usage.
 
-
 Consistency models like eventual consistency are commonly used in cloud systems to balance performance and reliability.
 
 Distributed systems often sacrifice strong consistency in favor of availability and scalability (CAP theorem).
-
-## Practical Setup
-
-A simple Redis replication environment was simulated using Docker Compose with two Redis nodes.
