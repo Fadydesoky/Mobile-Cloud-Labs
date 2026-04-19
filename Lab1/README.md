@@ -51,13 +51,19 @@ The application simulates latency using random delays.
 
 ## AWS Exploration
 
-Amazon EC2 instances use the Nitro Hypervisor, which offloads virtualization tasks to dedicated hardware.
+Amazon EC2 instances use the Nitro Hypervisor, which offloads virtualization tasks to dedicated hardware components.
 
-### Benefits:
-- Improved performance
-- Enhanced security
-- Better isolation
+This enhances:
+- Performance
+- Security
+- Isolation
 
+### EC2 Instance Example
+
+![AWS EC2 Instance](screenshots/aws-ec2.png)
+The instance is shown in a running state, demonstrating a typical cloud deployment environment.
+
+The EC2 instance is shown in a running state within a standard AWS region, representing a typical cloud deployment environment.
 ---
 
 ## Tail Latency
