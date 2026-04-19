@@ -15,6 +15,17 @@ This setup is used to observe how data behaves across multiple nodes in a distri
 
 ---
 
+## Application Integration
+
+A simple Flask API was used to simulate interaction with Redis nodes.
+
+Endpoints:
+- `/write` → writes data to the primary node  
+- `/read-primary` → reads data from the primary node  
+- `/read-replica` → reads data from the secondary node  
+
+This demonstrates how applications interact with distributed systems in real-world scenarios.
+
 ## Redis Simulation
 
 ![Redis Simulation](screenshots/redis-simulation.png)
