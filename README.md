@@ -94,11 +94,14 @@ Sample response from the backend:
 ### Kubernetes Pods
 ![Kubernetes Pods](Lab3/screenshots/k8s-pods.png)
 
-### Redis Simulation
-![Redis Simulation](Lab2/screenshots/redis-simulation.png)
+### System Memory Usage (Lab 1)
+![System Memory](Lab1/screenshots/system-memory.png)
 
 ### Latency Histogram
 ![Latency](Lab1/screenshots/latency.png)
+
+### Redis Simulation
+![Redis Simulation](Lab2/screenshots/redis-simulation.png)
 
 ### Frontend Dashboard
 ![Frontend](frontend/screenshots/frontend.png)
