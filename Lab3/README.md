@@ -44,9 +44,13 @@ Cgroups control resource allocation like CPU and memory limits.
 Kubernetes automatically schedules pods to nodes based on available resources and constraints.
 
 
-
 ## Design Decisions
 
 - Multi-stage builds were used to reduce image size.
 - Kubernetes Deployment ensures scalability and fault tolerance.
 - Probes improve system reliability by monitoring health.
+
+## Practical Execution
+
+Docker images were built and tested locally.
+Kubernetes configuration files were prepared to simulate deployment behavior.
