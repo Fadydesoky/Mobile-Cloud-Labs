@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import axios
 function App() {
   const [dark, setDark] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -15,6 +15,28 @@ function App() {
     setData([]);
     setDelay(null);
 
+
+// API call function
+export const fetchData = async (url) => {
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error fetching data');
+  }
+};
+
+// API call with retry logic
+export const fetchDataWithRetry = async (url, retries = 3) => {
+  for (let i = 0; i < retries; i++) {
+    try {
+      return await fetchData(url);
+    } catch (error) {
+      if (i === retries - 1) throw error;
+    }
+  }
+};
+    
     const start = performance.now();
 
     try {
