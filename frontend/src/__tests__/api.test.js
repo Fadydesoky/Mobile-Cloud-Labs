@@ -1,68 +1,43 @@
 import axios from 'axios';
-
-// API call function
-export const fetchData = async (url) => {
-    try {
-        const response = await axios.get(url);
-        return response.data;
-    } catch (error) {
-        throw new Error('Error fetching data');
-    }
-};
-
-// API call with retry logic
-export const fetchDataWithRetry = async (url, retries = 3) => {
-    for (let i = 0; i < retries; i++) {
-        try {
-            const data = await fetchData(url);
-            return data;
-        } catch (error) {
-            if (i === retries - 1) throw error; // if it's the last retry, throw error
-        }
-    }
-};
-
-// Jest tests for API calls
-import { fetchData, fetchDataWithRetry } from './api';
-import axios from 'axios';
+import { fetchData, fetchDataWithRetry } from '../api';
 
 jest.mock('axios');
 
 describe('API Calls', () => {
-    test('fetchData success', async () => {
-        const data = { data: 'sample data' };
-        axios.get.mockResolvedValue(data);
 
-        const result = await fetchData('https://api.example.com/data');
-        expect(result).toEqual(data);
-    });
+  test('fetchData success', async () => {
+    const mockResponse = { data: 'sample data' };
+    axios.get.mockResolvedValue({ data: mockResponse });
 
-    test('fetchData failure', async () => {
-        axios.get.mockRejectedValue(new Error('Error fetching data'));
+    const result = await fetchData('https://api.example.com/data');
+    expect(result).toEqual(mockResponse);
+  });
 
-        await expect(fetchData('https://api.example.com/data')).rejects.toThrow('Error fetching data');
-    });
+  test('fetchData failure', async () => {
+    axios.get.mockRejectedValue(new Error());
 
-    test('fetchDataWithRetry success on first attempt', async () => {
-        const data = { data: 'sample data' };
-        axios.get.mockResolvedValue(data);
+    await expect(
+      fetchData('https://api.example.com/data')
+    ).rejects.toThrow('Error fetching data');
+  });
 
-        const result = await fetchDataWithRetry('https://api.example.com/data');
-        expect(result).toEqual(data);
-    });
+  test('fetchDataWithRetry success on retry', async () => {
+    const mockResponse = { data: 'sample data' };
 
-    test('fetchDataWithRetry retries on failure', async () => {
-        const data = { data: 'sample data' };
-        axios.get.mockRejectedValueOnce(new Error('Error fetching data'));
-        axios.get.mockResolvedValueOnce(data);
+    axios.get
+      .mockRejectedValueOnce(new Error())
+      .mockResolvedValueOnce({ data: mockResponse });
 
-        const result = await fetchDataWithRetry('https://api.example.com/data');
-        expect(result).toEqual(data);
-    });
+    const result = await fetchDataWithRetry('https://api.example.com/data', 2);
+    expect(result).toEqual(mockResponse);
+  });
 
-    test('fetchDataWithRetry fails after all retries', async () => {
-        axios.get.mockRejectedValue(new Error('Error fetching data'));
+  test('fetchDataWithRetry fails after retries', async () => {
+    axios.get.mockRejectedValue(new Error());
 
-        await expect(fetchDataWithRetry('https://api.example.com/data')).rejects.toThrow('Error fetching data');
-    });
+    await expect(
+      fetchDataWithRetry('https://api.example.com/data', 2)
+    ).rejects.toThrow('Error fetching data');
+  });
+
 });
