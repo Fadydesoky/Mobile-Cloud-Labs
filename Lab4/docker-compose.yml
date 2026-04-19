@@ -23,9 +23,10 @@ services:
     ports:
       - "5002:5002"
 
+    env_files:
+    - ../../ .env
     environment:
       PRODUCT_SERVICE_URL: http://product-service:5001
-
     depends_on:
       - product-service
 
