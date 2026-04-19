@@ -1,4 +1,4 @@
-# Mobile-Cloud-Labs
+# Mobile-Cloud-System
 
 ![Docker](https://img.shields.io/badge/Docker-Containerization-blue)
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-Orchestration-blueviolet)
@@ -14,6 +14,22 @@ This repository presents a complete hands-on exploration of Mobile and Cloud Com
 The project demonstrates how modern cloud-native applications are built using containers, orchestration, and distributed system principles.
 
 ---
+## System Architecture
+
+The following diagram illustrates the overall architecture of the project, connecting mobile clients, cloud services, and distributed systems:
+
+![Architecture Diagram](Lab3/screenshots/architecture-diagram.png)
+
+This architecture represents a simplified cloud-native system combining client interaction, backend services, and distributed components.
+
+This represents a complete mobile-cloud workflow:
+- Mobile client sends requests  
+- Flask API processes data  
+- Kubernetes manages deployment  
+- Redis (optional) simulates distributed storage
+
+---
+
 
 ## Labs Overview
 
@@ -23,19 +39,24 @@ The project demonstrates how modern cloud-native applications are built using co
 
 ---
 
-## System Architecture
+## Quick Start
 
-The following diagram illustrates the overall architecture of the project, connecting mobile clients, cloud services, and distributed systems:
+The system can be executed locally using Docker and Node.js as shown below.
 
-![Architecture Diagram](Lab3/screenshots/architecture-diagram.png)
+### 1. Run Backend (Lab 3)
+cd Lab3
+docker build -f Dockerfile.basic -t lab3 .
+docker run -p 5000:5000 lab3
 
-This represents a complete mobile-cloud workflow:
-- Mobile client sends requests  
-- Flask API processes data  
-- Kubernetes manages deployment  
-- Redis (optional) simulates distributed storage  
+### 2. Run Frontend
+cd frontend
+npm install
+npm start
 
----
+### 3. Access the System
+Frontend: http://localhost:3000  
+API: http://localhost:5000
+
 
 ## Screenshots
 
@@ -66,6 +87,7 @@ This represents a complete mobile-cloud workflow:
 - Kubernetes (Orchestration Concepts)
 - Redis (Distributed Systems Simulation)
 - React.JS (Frontend Dashboard)
+  
 ---
 
 ## Key Concepts Covered
