@@ -10,6 +10,11 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   # ============================
   # Backend (Python)
@@ -67,7 +72,7 @@ jobs:
 
       - name: Build
         working-directory: frontend
-        run: npm run build || true
+        run: npm run build
 
   # ============================
   # Docker Build
@@ -101,14 +106,19 @@ jobs:
         with:
           node-version: "18"
 
-      - name: Build frontend
+      - name: Install & Build
         run: |
           cd frontend
           npm install
-          npm run build || true
+          npm run build
 
-      - name: Deploy to Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./frontend/build
+          path: ./frontend/build
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2
