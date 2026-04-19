@@ -51,6 +51,8 @@ The application simulates latency using random delays.
 
 ## AWS Exploration
 
+The AWS EC2 environment represents a real-world cloud deployment scenario where such applications can be hosted.
+
 Amazon EC2 instances use the Nitro Hypervisor, which offloads virtualization tasks to dedicated hardware components.
 
 This enhances:
@@ -64,6 +66,7 @@ This enhances:
 The instance is shown in a running state, demonstrating a typical cloud deployment environment.
 
 The EC2 instance is shown in a running state within a standard AWS region, representing a typical cloud deployment environment.
+
 ---
 
 ## Tail Latency
