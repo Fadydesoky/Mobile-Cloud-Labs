@@ -88,6 +88,8 @@ This represents a complete mobile-cloud workflow:
 
 ## Notes
 
-This project focuses on combining practical configurations with conceptual understanding.
+This project combines practical implementations with conceptual understanding of cloud-native systems.
 
-Some components are demonstrated through simulation to reflect real-world system behavior while maintaining consistency with cloud-native architecture patterns.
+Some components are demonstrated through simulation to reflect real-world system behavior while maintaining alignment with modern cloud architecture patterns.
+
+Overall, the project represents a simplified end-to-end cloud-native system, covering client interaction, backend services, and orchestration in a unified workflow.
