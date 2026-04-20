@@ -167,10 +167,52 @@ This project is organized into four progressive labs, each building on the previ
 
 | Lab | Topic | What You'll Learn |
 |-----|-------|-------------------|
-| [Lab 1](Lab1/README.md) | **Virtualization & Cloud** | VMs vs Containers, Tail Latency, AWS EC2 |
-| [Lab 2](Lab2/README.md) | **Distributed Systems** | Redis Replication, CAP Theorem, Consistency |
-| [Lab 3](Lab3/README.md) | **Container Orchestration** | Docker Multi-stage Builds, Kubernetes, Health Probes |
-| [Lab 4](Lab4/README.md) | **Microservices** | Service Communication, Fault Tolerance, Recovery |
+| [Lab 1](Lab1/README.md) | **Virtualization & Cloud** | VMs vs Containers, Tail Latency, AWS EC2, Nitro Hypervisor |
+| [Lab 2](Lab2/README.md) | **Distributed Systems** | Redis Replication, CAP Theorem, Consistency Models, Raft Consensus |
+| [Lab 3](Lab3/README.md) | **Container Orchestration** | Docker Multi-stage Builds, Kubernetes, Health Probes, HPA |
+| [Lab 4](Lab4/README.md) | **Microservices** | Service Communication, Fault Tolerance, Recovery Patterns |
+
+### Lab Highlights
+
+<details>
+<summary><strong>Lab 1: Virtualization & Cloud Fundamentals</strong></summary>
+
+- Compare Virtual Machines vs Containers (startup time, memory overhead, isolation)
+- Analyze latency patterns and understand tail latency (P99, P99.9)
+- Deploy on AWS EC2 with Nitro Hypervisor architecture
+- Flask API with simulated network latency for performance testing
+
+</details>
+
+<details>
+<summary><strong>Lab 2: Distributed Systems & Consistency</strong></summary>
+
+- Implement Redis Primary-Replica replication pattern
+- Observe replication lag and eventual consistency in action
+- Understand CAP theorem trade-offs (Consistency, Availability, Partition Tolerance)
+- Explore consensus algorithms (Raft) used in production systems
+
+</details>
+
+<details>
+<summary><strong>Lab 3: Container Orchestration</strong></summary>
+
+- Master Docker multi-stage builds (reduce image size from ~900MB to ~150MB)
+- Understand Linux namespaces and cgroups for container isolation
+- Deploy to Kubernetes with Deployments, Services, and HPA
+- Implement liveness and readiness probes for self-healing
+
+</details>
+
+<details>
+<summary><strong>Lab 4: Microservices Architecture</strong></summary>
+
+- Build independent Product and Order microservices
+- Implement inter-service communication via REST APIs
+- Handle failures gracefully with retry logic and fallback responses
+- Demonstrate service recovery after outages
+
+</details>
 
 Each lab has its own detailed README with architecture diagrams, code explanations, and hands-on exercises.
 
@@ -230,19 +272,54 @@ All 9 checks must pass before merging. You can see the pipeline status in the ba
 ## Screenshots
 
 <details>
-<summary><strong>Click to view screenshots</strong></summary>
+<summary><strong>Click to view all screenshots</strong></summary>
 
-### Dashboard
+### Frontend Dashboard
 ![Dashboard](frontend/screenshots/frontend.png)
 
-### Docker Containers
-![Containers](Lab4/screenshots/containers_running.png)
+---
 
-### Kubernetes Deployment
-![Kubernetes](Lab3/screenshots/k8s-pods.png)
+### Lab 1: Virtualization & Cloud Fundamentals
 
-### Service Communication
-![Logs](Lab4/screenshots/logs.png)
+| AWS EC2 Instance | Latency Analysis | System Memory |
+|:---:|:---:|:---:|
+| ![AWS EC2](Lab1/screenshots/aws-ec2.png) | ![Latency](Lab1/screenshots/latency.png) | ![Memory](Lab1/screenshots/system-memory.png) |
+
+---
+
+### Lab 2: Distributed Systems & Consistency
+
+| Redis Replication Simulation |
+|:---:|
+| ![Redis Simulation](Lab2/screenshots/redis-simulation.png) |
+
+---
+
+### Lab 3: Container Orchestration
+
+| Architecture Diagram | Docker Build | Docker Images |
+|:---:|:---:|:---:|
+| ![Architecture](Lab3/screenshots/architecture-diagram.png) | ![Docker Build](Lab3/screenshots/docker-build.png) | ![Docker Images](Lab3/screenshots/docker-images.png) |
+
+| Kubernetes Pods | Postman API Test |
+|:---:|:---:|
+| ![K8s Pods](Lab3/screenshots/k8s-pods.png) | ![Postman](Lab3/screenshots/postman-mobile-api.png) |
+
+---
+
+### Lab 4: Microservices Architecture
+
+| Containers Running | Product Health | Product Data |
+|:---:|:---:|:---:|
+| ![Containers](Lab4/screenshots/containers_running.png) | ![Product Health](Lab4/screenshots/product_health.png) | ![Product Data](Lab4/screenshots/product_data.png) |
+
+| Order Success | Failure Simulation | Recovery |
+|:---:|:---:|:---:|
+| ![Order Success](Lab4/screenshots/order_success.png) | ![Failure](Lab4/screenshots/failure_simulation.png) | ![Recovery](Lab4/screenshots/recovery.png) |
+
+| Service Communication Logs |
+|:---:|
+| ![Logs](Lab4/screenshots/logs.png) |
 
 </details>
 
