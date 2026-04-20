@@ -202,6 +202,7 @@ jobs:
           context: Lab4/order-service
           file: Lab4/order-service/Dockerfile
           push: false
+          load: true
           tags: mobile-cloud-system:order-service
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -212,6 +213,7 @@ jobs:
           context: Lab4/product-service
           file: Lab4/product-service/Dockerfile
           push: false
+          load: true
           tags: mobile-cloud-system:product-service
           cache-from: type=gha
           cache-to: type=gha,mode=max
