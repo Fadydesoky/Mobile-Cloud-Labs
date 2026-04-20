@@ -1,6 +1,8 @@
 __pycache__/
 *.pyc
 .env
+.env.*
+.DS_Store
 
 # Build outputs
 frontend/build/
