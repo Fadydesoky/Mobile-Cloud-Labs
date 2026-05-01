@@ -3,7 +3,7 @@
 ### An Observability Dashboard for Cloud-Native Microservices
 
 [![CI/CD Pipeline](https://github.com/Fadydesoky/Mobile-Cloud-System/actions/workflows/ci.yml/badge.svg)](https://github.com/Fadydesoky/Mobile-Cloud-System/actions/workflows/ci.yml)
-[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://fadydesoky.github.io/Mobile-Cloud-System/)
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://cloud-native-pipeline.vercel.app/)
 [![Python](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11-blue)](https://www.python.org/)
 [![Docker](https://img.shields.io/badge/docker-containerized-2496ED)](https://www.docker.com/)
 [![Kubernetes](https://img.shields.io/badge/kubernetes-orchestration-326CE5)](https://kubernetes.io/)
@@ -17,7 +17,7 @@ This project is a **production-grade cloud-native system** that I built to demon
 
 Whether you're a recruiter looking at my portfolio, a fellow developer exploring cloud patterns, or a student learning distributed systems - I hope this project gives you valuable insights into how modern cloud applications are built.
 
-**[View Live Demo](https://fadydesoky.github.io/Mobile-Cloud-System/)**
+**[View Live Demo](https://cloud-native-pipeline.vercel.app/)**
 
 ---
 
@@ -52,12 +52,12 @@ The result is this project - a hands-on demonstration of concepts that power com
 Here's how all the pieces fit together:
 
 ```
-                              MOBILE CLIENT / BROWSER
-                            (React Dashboard)
+                          MOBILE CLIENT / BROWSER
+                             (React Dashboard)
                                      │
                                      ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                            API GATEWAY LAYER                                 │
+│                            API GATEWAY LAYER                                │
 └──────────────────────────────────┬──────────────────────────────────────────┘
                                    │
                     ┌──────────────┴──────────────┐
@@ -71,17 +71,17 @@ Here's how all the pieces fit together:
                    └──────────────┬──────────────┘
                                   ▼
           ┌───────────────────────────────────────────────┐
-          │              CONTAINER LAYER                   │
+          │              CONTAINER LAYER                  │
           │    Docker  │  Kubernetes  │  Docker Compose   │
           └───────────────────────────────────────────────┘
                                   │
                                   ▼
           ┌───────────────────────────────────────────────┐
           │           DISTRIBUTED DATA LAYER              │
-          │   ┌─────────┐       ┌─────────┐              │
-          │   │ Primary │ ────► │ Replica │              │
-          │   │ (Write) │       │ (Read)  │              │
-          │   └─────────┘       └─────────┘              │
+          │   ┌─────────┐       ┌─────────┐               │
+          │   │ Primary │ ────► │ Replica │               │
+          │   │ (Write) │       │ (Read)  │               │
+          │   └─────────┘       └─────────┘               │
           │              Redis Cluster                    │
           └───────────────────────────────────────────────┘
 ```
@@ -107,7 +107,7 @@ Here's how all the pieces fit together:
 
 ### Option 1: Just Want to See It?
 
-Check out the **[Live Demo](https://fadydesoky.github.io/Mobile-Cloud-System/)** - no installation required!
+Check out the **[Live Demo](https://cloud-native-pipeline.vercel.app/)** - no installation required!
 
 ### Option 2: Run Locally with Docker
 
