@@ -51,6 +51,8 @@ The result is this project - a hands-on demonstration of concepts that power com
 
 Here's how all the pieces fit together:
 
+<p align="center">
+  
 ```
                           MOBILE CLIENT / BROWSER
                              (React Dashboard)
@@ -85,6 +87,8 @@ Here's how all the pieces fit together:
           │              Redis Cluster                    │
           └───────────────────────────────────────────────┘
 ```
+
+</p>
 
 ---
 
