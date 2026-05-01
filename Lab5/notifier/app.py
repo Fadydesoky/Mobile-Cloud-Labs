@@ -1,10 +1,17 @@
-import redis
+from flask import Flask, request, jsonify
+from datetime import datetime
 
-r = redis.Redis(host="redis", port=6379)
+app = Flask(__name__)
 
-print("🔔 Notifier Started...")
+@app.route("/notify", methods=["POST"])
+def notify():
+    event = request.get_json()
 
-while True:
-    event = r.brpop("notify_queue", timeout=5)
-    if event:
-        print(f"📢 Notification: processed {event[1].decode()}")
+    print("NOTIFY:", event, flush=True)
+
+    return jsonify({
+        "status": "notified",
+        "time": datetime.now().isoformat()
+    })
+
+app.run(host="0.0.0.0", port=5000)
