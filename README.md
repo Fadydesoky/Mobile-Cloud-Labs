@@ -51,7 +51,6 @@ The result is this project - a hands-on demonstration of concepts that power com
 
 Here's how all the pieces fit together:
 
-<div align="center">
   
 ```
                                 MOBILE CLIENT / BROWSER
@@ -87,8 +86,6 @@ Here's how all the pieces fit together:
         │                     Redis Cluster                                    │
         └──────────────────────────────────────────────────────────────────────┘
 ```
-
-</div>
 
 ---
 
