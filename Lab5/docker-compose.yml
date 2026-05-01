@@ -1,45 +1,79 @@
-version: "3.9"
-
 services:
   redis:
     image: redis:7-alpine
     container_name: lab5-redis
     ports:
-      - "6379:6379"
+      - "6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+    restart: unless-stopped
 
   image-resizer:
     build: ./functions/image_resizer
     container_name: lab5-image-resizer
     ports:
-      - "5001:5000"
+      - "5010:5000"
     volumes:
       - ./data:/data
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
 
   notifier:
     build: ./functions/notifier
     container_name: lab5-notifier
     ports:
-      - "5002:5000"
+      - "5011:5000"
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
 
   event-router:
     build: ./router
     container_name: lab5-event-router
     depends_on:
-      - redis
-      - image-resizer
-      - notifier
+      redis:
+        condition: service_healthy
+      image-resizer:
+        condition: service_healthy
+      notifier:
+        condition: service_healthy
     environment:
       - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - IMAGE_RESIZER_URL=http://image-resizer:5000
+      - NOTIFIER_URL=http://notifier:5000
     volumes:
       - ./data:/data
+    restart: unless-stopped
 
   event-source:
     build: ./event_source
     container_name: lab5-event-source
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
+      event-router:
+        condition: service_started
     environment:
       - REDIS_HOST=redis
+      - REDIS_PORT=6379
       - WATCH_DIR=/data/input
     volumes:
       - ./data:/data
+    restart: unless-stopped
