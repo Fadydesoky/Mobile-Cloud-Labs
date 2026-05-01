@@ -51,7 +51,7 @@ The result is this project - a hands-on demonstration of concepts that power com
 
 Here's how all the pieces fit together:
 
-<p align="center">
+<div align="center">
   
 ```
                          CLIENT / DASHBOARD (React Frontend)
@@ -88,7 +88,7 @@ Here's how all the pieces fit together:
 
 ```
 
-</p>
+</div>
 
 ---
 
