@@ -17,6 +17,8 @@ This project is a **production-grade cloud-native system** that I built to demon
 
 Whether you're a recruiter looking at my portfolio, a fellow developer exploring cloud patterns, or a student learning distributed systems - I hope this project gives you valuable insights into how modern cloud applications are built.
 
+Designed to simulate real-world distributed systems behavior in a local environment.
+
 **[View Live Demo](https://cloud-native-pipeline.vercel.app/)**
 
 ---
