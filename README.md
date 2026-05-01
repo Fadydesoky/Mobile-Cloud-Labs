@@ -153,6 +153,12 @@ Mobile-Cloud-System/
 ├── Lab4/                    # Microservices Architecture
 │   ├── order-service/       # Order processing microservice
 │   └── product-service/     # Product catalog microservice
+├── Lab5/                    # Event-Driven Architecture
+│   ├── event_source/        # File system watcher service
+│   ├── router/              # Event routing service
+│   └── functions/           # Serverless-style functions
+│       ├── image_resizer/   # Image processing function
+│       └── notifier/        # Notification function
 │
 ├── frontend/                # React Observability Dashboard
 │
@@ -171,6 +177,7 @@ This project is organized into four progressive labs, each building on the previ
 | [Lab 2](Lab2/README.md) | **Distributed Systems** | Redis Replication, CAP Theorem, Consistency Models, Raft Consensus |
 | [Lab 3](Lab3/README.md) | **Container Orchestration** | Docker Multi-stage Builds, Kubernetes, Health Probes, HPA |
 | [Lab 4](Lab4/README.md) | **Microservices** | Service Communication, Fault Tolerance, Recovery Patterns |
+| [Lab 5](Lab5/README.md) | **Event-Driven Architecture** | Serverless Patterns, Redis Streams, Message Brokers, Async Processing |
 
 ### Lab Highlights
 
@@ -211,6 +218,16 @@ This project is organized into four progressive labs, each building on the previ
 - Implement inter-service communication via REST APIs
 - Handle failures gracefully with retry logic and fallback responses
 - Demonstrate service recovery after outages
+
+</details>
+
+<details>
+<summary><strong>Lab 5: Event-Driven Architecture</strong></summary>
+
+- Implement a local serverless-style image processing pipeline
+- Use Redis Streams as a message broker for event-driven communication
+- Build decoupled microservices that react to events asynchronously
+- Understand the patterns behind AWS Lambda, Azure Functions, and similar platforms
 
 </details>
 
@@ -320,6 +337,18 @@ All 9 checks must pass before merging. You can see the pipeline status in the ba
 | Service Communication Logs |
 |:---:|
 | ![Logs](Lab4/screenshots/logs.png) |
+
+---
+
+### Lab 5: Event-Driven Architecture
+
+| Containers Running | Event Router Logs |
+|:---:|:---:|
+| ![Containers](Lab5/screenshots/01_containers_running.png) | ![Event Logs](Lab5/screenshots/02_event_router_logs.png) |
+
+| Docker Build | Output Result |
+|:---:|:---:|
+| ![Docker Build](Lab5/screenshots/03_docker_build.png) | ![Output](Lab5/screenshots/04_output_result.png) |
 
 </details>
 
