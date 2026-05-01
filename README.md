@@ -54,7 +54,8 @@ Here's how all the pieces fit together:
 <div align="center">
   
 ```
-                           CLIENT / DASHBOARD (React Frontend)
+                                MOBILE CLIENT / BROWSER
+                                   (React Dashboard)
                                           │
                                           ▼
         ┌──────────────────────────────────────────────────────────────────────┐
@@ -79,13 +80,12 @@ Here's how all the pieces fit together:
                                        ▼
         ┌──────────────────────────────────────────────────────────────────────┐
         │                     DISTRIBUTED DATA LAYER                           │
-        │                 ┌─────────┐       ┌─────────┐                        │
-        │                 │ Primary │ ────► │ Replica │                        │
-        │                 │ (Write) │       │ (Read)  │                        │
-        │                 └─────────┘       └─────────┘                        │
-        │                          Redis Cluster                               │
+        │      ┌─────────┐       ┌─────────┐                                   │
+        │      │ Primary │ ────► │ Replica │                                   │
+        │      │ (Write) │       │ (Read)  │                                   │
+        │      └─────────┘       └─────────┘                                   │
+        │                     Redis Cluster                                    │
         └──────────────────────────────────────────────────────────────────────┘
-
 ```
 
 </div>
