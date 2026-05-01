@@ -17,7 +17,7 @@ The architecture demonstrates:
 ```
 ┌─────────────────┐      ┌─────────────────┐      ┌─────────────────┐
 │   Event Source  │      │  Event Router   │      │  Image Resizer  │
-│   (Watcher)     │─────▶│    (Router)     │─────▶│   (Function)    │
+│   (Watcher)     │─────▶│    (Router)     │─────▶│   (Function)   │
 │                 │      │                 │      │                 │
 │ Monitors input/ │      │ Consumes events │      │ Resizes images  │
 │ Publishes events│      │ Routes to funcs │      │ to data/output/ │
@@ -140,6 +140,21 @@ docker compose down
 > Note: External ports are different from Lab4 (5001, 5002) to avoid conflicts.
 
 ---
+
+## ⏱️ Cold Start Observation
+
+| Attempt | Request Type                | Time (seconds) |
+|--------|----------------------------|---------------|
+| 1      | Warm request               | 0.32          |
+| 2      | Warm request               | 0.29          |
+| 3      | Warm request               | 0.31          |
+| 4      | Cold start (after restart) | 1.85          |
+
+Average Warm Time: ~0.30 sec  
+Cold Start Time: ~1.85 sec  
+
+Observation:
+The first request after restarting the container is significantly slower due to initialization overhead, which simulates serverless cold start behavior.
 
 ## Screenshots
 
