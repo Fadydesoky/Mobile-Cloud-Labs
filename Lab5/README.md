@@ -57,16 +57,19 @@ Lab5/
 ## ⚙️ How to Run
 
 ### 1️⃣ Build services
-```docker compose build
+```
+docker compose build
 ```
 
 ### 2️⃣ Run the system
-```docker compose up
+```
+docker compose up
 ```
 
 ### 3️⃣ Add an image
 Place any image inside:
-```data/input/
+```
+data/input/
 ```
 
 
