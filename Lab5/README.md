@@ -67,11 +67,7 @@ docker compose up
 ```
 
 ### 3️⃣ Add an image
-Place any image inside:
-```
-data/input/
-```
-
+Place any image inside: `data/input/`
 
 The system will automatically:
 - detect the image  
