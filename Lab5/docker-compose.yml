@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:7
+    container_name: redis_lab5
+    ports:
+      - "6379:6379"
+
+  event-router:
+    build: ./router
+    container_name: event_router
+    depends_on:
+      - redis
+
+  image-resizer:
+    build: ./functions/image_resizer
+    container_name: image_resizer
+    volumes:
+      - ./data:/data
+    depends_on:
+      - redis
+
+  notifier:
+    build: ./functions/notifier
+    container_name: notifier
+    depends_on:
+      - redis
+
+  event-source:
+    build: ./event_source
+    container_name: event_source
+    volumes:
+      - ./data:/data
+    depends_on:
+      - redis
