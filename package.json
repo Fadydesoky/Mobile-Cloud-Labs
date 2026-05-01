@@ -25,8 +25,5 @@
     "type": "git",
     "url": "https://github.com/Fadydesoky/Mobile-Cloud-System.git"
   },
-  "dependencies": {
-    "@testing-library/react": "^16.3.2",
-    "react": "^19.2.5"
-  }
+  "dependencies": {}
 }
