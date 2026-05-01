@@ -28,16 +28,27 @@ The system consists of the following components:
 ## 📂 Project Structure
 
 Lab5/
+
 ├── docker-compose.yml
+
 ├── data/
+
 │ ├── input/
+
 │ └── output/
+
 ├── event_source/
+
 ├── router/
+
 ├── functions/
+
 │ ├── image_resizer/
+
 │ └── notifier/
+
 ├── screenshots/
+
 └── README.md
 
 
