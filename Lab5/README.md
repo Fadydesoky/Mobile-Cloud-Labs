@@ -78,31 +78,47 @@ The system will automatically:
 
 ## 📸 Screenshots
 
-### 🔹 Running Containers
+<details>
+<summary>🔹 Running Containers</summary>
+
 All services are up and running successfully.
 
 ![Running Containers](screenshots/01_containers_running.png)
 
+</details>
+
 ---
 
-### 🔹 Event Router Logs
+<details>
+<summary>🔹 Event Router Logs</summary>
+
 Shows the event-driven pipeline flow from image upload to processing and notification.
 
 ![Event Logs](screenshots/02_event_router_logs.png)
 
+</details>
+
 ---
 
-### 🔹 Docker Build Process
+<details>
+<summary>🔹 Docker Build Process</summary>
+
 All services are successfully built using Docker.
 
 ![Docker Build](screenshots/03_docker_build.png)
 
+</details>
+
 ---
 
-### 🔹 Output Image Result
+<details>
+<summary>🔹 Output Image Result</summary>
+
 Processed image generated successfully (before vs after).
 
 ![Output Result](screenshots/04_output_result.png)
+
+</details>
 
 ---
 
